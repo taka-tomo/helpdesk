@@ -1,0 +1,65 @@
+<% provide(:title, 'Details of the Inquiry') %>
+<h1>Details of the Inquiry</h1>
+
+<h2>Inquiry</h2>
+<p>
+	<strong>Contetns:</strong>
+	<%= @inquiry.contents %>
+</p>
+
+<p>
+	<strong>Category</strong>
+	<%= @inquiry.category.name %>
+</p>
+
+<p>
+	<strong>Status</strong>
+	<%= @inquiry.status.name %>
+</p>
+
+<p>
+	<strong>Inquired Person:</strong>
+	<%= User.find(@inquiry.user_id).name %>
+</p>
+
+<p>
+	<strong>Accepted Datetime:</strong>
+	<% c_date = @inquiry.created_at.strftime("%b %d, %Y at %I:%M %p") %>
+	<%= c_date %>
+</p>
+
+<p>
+	<strong>Last Updating:</strong>
+	<% u_date = @inquiry.updated_at.strftime("%b %d, %Y at %I:%M %p") %>
+	<%= u_date %>
+</p>
+
+<% if current_user?(@inquiry.user) %>
+	<hr />
+	<%= form_for(@inquiry) do |f| %>
+		<p>
+			<%= f.label :status_id, "Resolved ? (Yes: Check-On, No: Check-Off)" %>
+			<%= f.check_box :status_id, {}, @resolved_status.id, @unresolved_status.id %>
+			<%= f.submit "Save status" %>
+		</p>
+	<% end %>
+<% end %>
+
+<hr />
+
+<h2>Responses</h2>
+<% @responses.each do |res| %>
+	<div>
+		<% res_dat = res.created_at.strftime("%b %d, %Y at %I:%M %p") %>
+		<%= res.contents %> [<%= User.find(res.user_id).name %>] (<%= res_dat %>)
+	</div>
+<% end %>
+
+<br>
+
+<div>
+	<strong>Response Register</strong>
+	<%= render 'responses/form' %>
+</div>
+
+<%= link_to 'to inquiry list', inquiries_path %>

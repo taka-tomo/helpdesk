@@ -1,0 +1,21 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <nav>
+        <ul class="nav pull-right">
+          <% if signed_in? %>
+            <li><%= link_to "Home", inquiries_path %></li>
+            <li><%= link_to current_user.name, edit_user_path(current_user) %></li>
+            <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+            <% if current_user.admin? %>
+              <li><%= link_to "Users", users_path %></li>
+              <li><%= link_to "Charts", charts_path %></li>
+            <% end %>
+          <% else %>
+            <li><%= link_to "Home", root_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

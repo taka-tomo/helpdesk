@@ -1,0 +1,15 @@
+<%= search_form_for @q do |f| %>
+	<%= f.label :user_name_start, "Inquired Person" %>
+	<%= f.collection_select :user_name_start, User.all, :name, :name, :include_blank => true %>
+	
+	<%= f.label :user_department_name_start, "Department" %>
+	<%= f.collection_select :user_department_name_start, Department.all, :name, :name, :include_blank => true %>
+	
+	<%= f.label :category_name_start, "Category" %>
+	<%= f.collection_select :category_name_start, Category.all, :name, :name, :include_blank => true %>
+	
+	<%= f.label :status_name_start, "Status" %>
+	<%= f.collection_select :status_name_start, Status.all, :name, :name, :include_blank => true %>
+	
+	<%= f.submit %>
+<% end %>

@@ -1,0 +1,14 @@
+<% provide(:title, @user.code) %>
+
+<h1>
+  <%= @user.name %>'s Page
+</h1>
+
+<p>
+	<%= @user.code %>
+</p>
+<p>
+	<% dpt = Department.find_by(id:@user.department_id) %>
+	<%= dpt.name %>
+</p>
+

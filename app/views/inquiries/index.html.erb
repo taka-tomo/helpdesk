@@ -1,0 +1,43 @@
+<% provide(:title, 'List of Inquiries') %>
+<h1>List of Inquiries</h1>
+
+<hr />
+<%= render 'search_form' %>
+
+<hr />
+<h4>If you give a response to a inquiry, you click the 'show'.</h4>
+<table>
+	<thead>
+		<tr>
+			<th>Contents</th>
+			<th>Category</th>
+			<th>Status</th>
+			<th>Inquired Person</th>
+			<th>Department</th>
+			<th>Accepted Datetime</th>
+			<th colspan="6"></th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<% @inquiries.each do |inq| %>
+			<tr>
+				<% usr = User.find(inq.user_id) %>
+				<% dat = inq.created_at.strftime("%b %d, %Y at %I:%M %p") %>
+				
+				<td><%= inq.contents %></td>
+				<td><%= inq.category.name %></td>
+				<td><%= inq.status.name %></td>
+				<td><%= usr.name %></td>
+				<td><%= usr.department.name %></td>
+				<td><%= dat %></td>
+				<td><%= link_to 'edit', edit_inquiry_path(inq) %></td>
+				<td><%= link_to 'show', inq %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<hr />
+<li><%= link_to 'New Inquiry', new_inquiry_path %></li>
+<li><%= link_to 'All of Response', responses_path %></li>

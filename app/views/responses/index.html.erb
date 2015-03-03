@@ -1,0 +1,42 @@
+<% provide(:title, 'List of Responses') %>
+<h1>List of Responses</h1>
+
+<hr />
+
+<%= render 'search_form' %>
+
+<hr />
+
+<table>
+	<thead>
+		<tr>
+			<th>Inquiry ID</th>
+			<th>Contents of Inquiry</th>
+			<th>Contents of Response</th>
+			<th>Responser</th>
+			<th>Responser's Department</th>
+			<th>Accepted Datetime</th>
+			<th colspan="6"></th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<% @responses.each do |res| %>
+			<tr>
+				<% inq_usr = User.find(res.inquiry.user_id) %>
+				<% res_usr = User.find(res.user_id) %>
+				<% res_dat = res.created_at.strftime("%b %d, %Y at %I:%M %p") %>
+				
+				<td><%= res.inquiry_id %></td>
+				<td><%= res.inquiry.contents %></td>
+				<td><%= res.contents %></td>
+				<td><%= res_usr.name %></td>
+				<td><%= res_usr.department.name %></td>
+				<td><%= res_dat %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<hr />
+

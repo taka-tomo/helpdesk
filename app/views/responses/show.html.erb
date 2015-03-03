@@ -1,0 +1,23 @@
+<% provide(:title, 'Your Response') %>
+<h1>Your Response</h1>
+
+<p>
+	<strong>Your code and name</strong>
+	<%= @user.code %> / <%= @user.name %>
+</p>
+<p>
+	<strong>Contetns:</strong>
+	<%= @response.contents %>
+</p>
+
+<p>
+	<strong>Responsed Datetime:</strong>
+	<%= @response.created_at %>
+</p>
+
+<p>
+	<strong>Inquiried Contents:</strong>
+	<%= @response.inquiry.contents %>
+</p>
+
+<%= link_to 'back', inquiry_path(@response.inquiry.id) %>

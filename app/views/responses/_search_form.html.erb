@@ -1,0 +1,12 @@
+<%= search_form_for @q do |f| %>
+	<%= f.label :inquiry_id_start, "Inquiry Id" %>
+	<%= f.search_field :inquiry_id_start %>
+	
+	<%= f.label :user_name_start, "Responser" %>
+	<%= f.collection_select :user_name_start, User.all, :name, :name, :include_blank => true %>
+	
+	<%= f.label :user_department_name_start, "Department" %>
+	<%= f.collection_select :user_department_name_start, Department.all, :name, :name, :include_blank => true %>
+	
+	<%= f.submit %>
+<% end %>
